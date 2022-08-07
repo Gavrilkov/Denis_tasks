@@ -26,13 +26,4 @@ namespace Compare
                 Console.WriteLine("Not the same objects");
         }
     }
-
-
-    public class Animal
-    {
-        public Animal(int a)
-        {
-            int age = a;
-        }
-    }
 }
