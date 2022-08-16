@@ -2,58 +2,38 @@
 {
     class Animal
     {
-        int age;
-        int weight;
+        int _age;
+        int _weight;
         public Animal(int a, int b)
         {
-            age = a;
-            weight = b;
+            _age = a;
+            _weight = b;
         }
+
         public override bool Equals(object obj)
         {
             if (obj.GetType() != this.GetType())
-                return false;
+            { return false; }
             var f = obj as Animal;
-            if (f == null) return false;
-            if (this.age == f.age && this.weight == f.weight)
-                return true;
-
-            else return false;
+            if (f == null) 
+            { return false; }
+            if (this._age == f._age && this._weight == f._weight)
+            { return true; }
+            return false;
         }
 
-        public static bool operator == (Animal obj1, Animal obj2)
+        public static bool operator ==(Animal obj1, Animal obj2)
         {
-
-            if (obj1 == null || obj2 == null) return false;
-            if (obj2.age == obj1.age && obj2.weight == obj1.weight)
-                return true;
-
-            else return false;
+            if ((object)obj1 == null || (object)obj2 == null)
+            {return false;}
+            if (obj2._age == obj1._age && obj2._weight == obj1._weight)
+            { return true; }
+            return false;
         }
+
         public static bool operator !=(Animal obj1, Animal obj2)
         {
-
-            if (obj1 == null || obj2 == null) return true;
-            if (obj2.age == obj1.age && obj2.weight == obj1.weight)
-                return false;
-
-            else return true;
+            return !(obj1 == obj2);
         }
-
-
     }
-
-    //public override bool Equals(object obj)
-    //{
-    //    if (obj.GetType() != this.GetType())
-    //        return false;
-    //    if (this.age == obj.age && this.weight == obj.weight)
-    //        return true;
-    //    else return false;
-    //}
-    //public bool Equals1(Animal obj)
-    //{
-    //    if (this.age == obj.age && this.weight == obj.weight)
-    //        return true;
-    //    else return false;
 }
