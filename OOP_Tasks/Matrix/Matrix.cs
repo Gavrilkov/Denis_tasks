@@ -6,80 +6,54 @@ namespace Matrix
 {
     public class Matrix
     {
-        int columns;
-        int rows;
-        int[,] Ar = new int[0, 0];
-        Random r = new Random();
-        public Matrix(int rows, int columns)
+        int _columns;
+        int _rows;
+        int[,] matrix;
+        Random _rand;
+        public Matrix(int _rows, int _columns)
         {
-            int[,] Ar = new int[rows, columns];
-            this.Ar = Ar;
-            this.rows = rows;
-            this.columns = columns;
+            matrix = new int[_rows, _columns];
+            this._rows = _rows;
+            this._columns = _columns;
+            _rand = new Random();
         }
 
-        public void init()
+        public void Init()
         {
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < _rows; i++)
             {
-                for (int y = 0; y < columns; y++)
+                for (int y = 0; y < _columns; y++)
                 {
-                    Ar[i, y] = r.Next(10);
-                   // Console.Write(Ar[i, y] + "\t");
+                    matrix[i, y] = _rand.Next(10);
                 }
-              //  Console.WriteLine();
             }
         }
 
-        //public override string tostring()
-        //{
-
-        //    return $" {Ar}";
-        //}
-
-        public void showmatrixadd(Matrix m1, Matrix m2)
+        public override string ToString()
         {
-            for (int i = 0; i < m1.rows; i++)
+            string s = "";
+            for (int i = 0; i < _rows; i++)
             {
-                for (int y = 0; y < m1.columns; y++)
+                for (int y = 0; y < _columns; y++)
                 {
-                    Console.Write(m1.Ar[i, y] + "\t"); ;
+                    s += $"{matrix[i, y]}" + " ";
                 }
-                Console.WriteLine();
+                s += "\n";
             }
-            Console.WriteLine('+' + "\t");
-            for (int i = 0; i < m2.rows; i++)
-            {
-                for (int y = 0; y < m2.columns; y++)
-                {
-                    Console.Write(m2.Ar[i, y] + "\t"); ;
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine('=' + "\t");
-
-            for (int i = 0; i < m2.rows; i++)
-            {
-                for (int y = 0; y < m2.columns; y++)
-                {
-                    Console.Write((m1.Ar[i, y] + m2.Ar[i, y]) + "\t"); ;
-                }
-                Console.WriteLine();
-            }
+            return s;
         }
 
         public static Matrix operator +(Matrix m1, Matrix m2)
         {
-            Matrix m3 = new Matrix(m1.rows, m1.columns);
-            for (int i = 0; i < m1.rows; i++)
+            Matrix m3 = new Matrix(m1._rows, m1._columns);
+            for (int i = 0; i < m1._rows; i++)
             {
-                for (int y = 0; y < m1.columns; y++)
+                for (int y = 0; y < m1._columns; y++)
                 {
-                    m3.Ar[i, y] = m1.Ar[i, y] + m2.Ar[i, y];
+                    m3.matrix[i, y] = m1.matrix[i, y] + m2.matrix[i, y];
                 }
             }
             return m3;
         }
-
     }
 }

@@ -18,10 +18,12 @@ namespace Matrix
         {
             var m1 = new Matrix(3, 5);
             var m2 = new Matrix(3, 5);
-            m1.init();
-            m2.init();
-            m1.showmatrixadd(m1, m2);
-
+            m1.Init();
+            m2.Init();
+            Console.WriteLine(m1.ToString());
+            Console.WriteLine(m2.ToString());
+            Matrix m3 = m1 + m2;
+            Console.WriteLine(m3.ToString());
         }
     }
 }
