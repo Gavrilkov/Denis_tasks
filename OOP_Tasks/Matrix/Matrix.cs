@@ -11,11 +11,11 @@ namespace Matrix
         int[,] _matrix;
         Random _rand;
 
-        public Matrix(int _rows, int _columns)
+        public Matrix(int rows, int columns)
         {
             _matrix = new int[_rows, _columns];
-            this._rows = _rows;
-            this._columns = _columns;
+            this._rows = rows;
+            this._columns = columns;
             _rand = new Random();
         }
 
