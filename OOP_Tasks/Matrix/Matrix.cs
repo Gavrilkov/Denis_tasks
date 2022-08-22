@@ -8,11 +8,12 @@ namespace Matrix
     {
         int _columns;
         int _rows;
-        int[,] matrix;
+        int[,] _matrix;
         Random _rand;
+
         public Matrix(int _rows, int _columns)
         {
-            matrix = new int[_rows, _columns];
+            _matrix = new int[_rows, _columns];
             this._rows = _rows;
             this._columns = _columns;
             _rand = new Random();
@@ -24,7 +25,7 @@ namespace Matrix
             {
                 for (int y = 0; y < _columns; y++)
                 {
-                    matrix[i, y] = _rand.Next(10);
+                    _matrix[i, y] = _rand.Next(10);
                 }
             }
         }
@@ -36,7 +37,7 @@ namespace Matrix
             {
                 for (int y = 0; y < _columns; y++)
                 {
-                    s += $"{matrix[i, y]}" + " ";
+                    s += $"{_matrix[i, y]}" + " ";
                 }
                 s += "\n";
             }
@@ -50,7 +51,7 @@ namespace Matrix
             {
                 for (int y = 0; y < m1._columns; y++)
                 {
-                    m3.matrix[i, y] = m1.matrix[i, y] + m2.matrix[i, y];
+                    m3._matrix[i, y] = m1._matrix[i, y] + m2._matrix[i, y];
                 }
             }
             return m3;
