@@ -6,16 +6,13 @@ namespace Project_homework_animal
 {
    public class Horse : Animal
     {
-        public int _age { get; set; }
-        public override string _food { get => base._food; set => base._food = value; }
-
-        public override string _lokation { get => base._lokation; set => base._lokation = value; }
+        public int Age { get; set; }
 
         public Horse(string food, string lokation, int age)
         {
-            _food = food;
-            _lokation = lokation;
-            _age = age;
+            Food = food;
+            Lokation = lokation;
+            Age = age;
         }
 
         public override void MakeNoise()
@@ -25,7 +22,7 @@ namespace Project_homework_animal
 
         public override void Eat()
         {
-            Console.WriteLine($"The horse is eating {_food} ");
+            Console.WriteLine($"The horse is eating {Food} ");
         }
     }
 }

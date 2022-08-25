@@ -8,7 +8,7 @@ namespace Project_homework_animal
     {
        public  void TreatAnimal(Animal animal)
         {
-            Console.WriteLine($" {animal} came to the reception with food {animal._food} and location {animal._lokation}");
+            Console.WriteLine($" {animal} came to the reception with food {animal.Food} and location {animal.Lokation}");
         }
     }
 }

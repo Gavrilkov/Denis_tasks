@@ -10,11 +10,11 @@ namespace Project_homework_animal
     //Добавьте переменные в классы Dog, Cat, Horse, характеризующие только этих животных.
     //Создайте класс Doctor, в котором определите метод void TreatAnimal(Animal animal). Пусть этот метод распечатывает food и location пришедшего на прием животного.
     //В методе main создайте массив типа Animal, в который запишите животных всех имеющихся у вас типов.В цикле отправляйте их на прием к ветеринару.
-    public class Animal
+    public abstract class Animal
     {
-        public virtual string _food { get; set; }
+        public  string Food { get; set; }
 
-        public virtual string _lokation { get; set; }
+        public  string Lokation { get; set; }
 
         public virtual void MakeNoise()
         {
@@ -23,7 +23,7 @@ namespace Project_homework_animal
 
         public virtual void Eat()
         {
-            Console.WriteLine($"The animal is eating {_food}");
+            Console.WriteLine($"The animal is eating {Food}");
         }
 
         public void Sleep()

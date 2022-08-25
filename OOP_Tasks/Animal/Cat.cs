@@ -6,16 +6,13 @@ namespace Project_homework_animal
 {
     class Cat: Animal
     {
-        public string _colour { get; set; }
-        public override string _food { get => base._food; set => base._food = value; }
-
-        public override string _lokation { get => base._lokation; set => base._lokation = value; }
+        public string Colour { get; set; }
 
         public Cat (string food, string lokation, string colour)
         {
-            _food = food;
-            _lokation = lokation;
-            _colour = colour;
+            Food = food;
+            Lokation = lokation;
+            Colour = colour;
         }
 
         public override void MakeNoise()
@@ -25,7 +22,7 @@ namespace Project_homework_animal
 
         public override void Eat()
         {
-            Console.WriteLine($"The cat is eating {_food} ");
+            Console.WriteLine($"The cat is eating {Food} ");
         }
     }
 }
