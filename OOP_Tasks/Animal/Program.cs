@@ -7,9 +7,9 @@ namespace Project_homework_animal
         static void Main(string[] args)
         {
             Doctor doc = new Doctor();
-            Animal cat = new Cat("milk", "home", "black");
-            Animal dog = new Dog("bones", "yard", "Bob");
-            Animal horse = new Horse("grass", "meadow", 12);
+            Animal cat = new Cat("black");
+            Animal dog = new Dog("Bob");
+            Animal horse = new Horse(12);
             horse.Eat();
             horse.Sleep();
             horse.MakeNoise();

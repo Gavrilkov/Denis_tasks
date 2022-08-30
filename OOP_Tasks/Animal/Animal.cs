@@ -16,6 +16,12 @@ namespace Project_homework_animal
 
         public  string Lokation { get; set; }
 
+        public Animal(string food, string lokation)
+        {
+            Food = food;
+            Lokation = lokation;
+        }
+
         public virtual void MakeNoise()
         {
             Console.WriteLine("The animal is making noise");

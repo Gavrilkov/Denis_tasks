@@ -8,13 +8,10 @@ namespace Project_homework_animal
     {
         public string Colour { get; set; }
 
-        public Cat (string food, string lokation, string colour)
+        public Cat ( string colour):base("milk", "home")
         {
-            Food = food;
-            Lokation = lokation;
             Colour = colour;
         }
-
         public override void MakeNoise()
         {
             Console.WriteLine("The cat is making noise");
