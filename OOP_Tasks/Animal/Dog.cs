@@ -8,7 +8,7 @@ namespace Project_homework_animal
     {
         public string Name { get; set; }
 
-        public Dog(string name):base("bones", "home")
+        public Dog(string food, string lokation, string name):base( food, lokation)
         {
             Name = name;
         }

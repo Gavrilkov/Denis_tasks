@@ -8,7 +8,7 @@ namespace Project_homework_animal
     {
         public int Age { get; set; }
 
-        public Horse(int age):base("grass", "meadow")
+        public Horse(string food, string lokation, int age) : base(food, lokation)
         {
             Age = age;
         }
