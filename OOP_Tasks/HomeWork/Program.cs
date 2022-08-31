@@ -12,7 +12,7 @@ namespace HomeWork
             g.Shot();
             g.Shot();
             g.Reload();
-            g.Shot();
+        //    g.Shot();
             g.showBullets();
 
             Console.WriteLine();
