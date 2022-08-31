@@ -22,15 +22,9 @@ namespace Project_homework_animal
             Lokation = lokation;
         }
 
-        public virtual void MakeNoise()
-        {
-            Console.WriteLine("The animal is making noise");
-        }
+        public abstract void MakeNoise();
 
-        public virtual void Eat()
-        {
-            Console.WriteLine($"The animal is eating {Food}");
-        }
+        public abstract void Eat();
 
         public void Sleep()
         {
