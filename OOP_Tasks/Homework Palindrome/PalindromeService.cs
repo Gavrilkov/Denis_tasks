@@ -7,8 +7,14 @@ namespace Homework_Palindrome
 {
    public class PalindromeService: IPalindromeService
     {
+
         public  bool  Check (string inputString)
         {
+            bool d = inputString.Contains(' ');
+            if (d)
+            {
+                throw new ArgumentException("Enter a word without spaces");
+            }
             char[] pol = new char[inputString.Length];
             pol = inputString.ToCharArray();
             char[] polrev = new char[pol.Length];
