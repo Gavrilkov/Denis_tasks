@@ -6,10 +6,24 @@ namespace Homework_Palindrome
     {
         static void Main(string[] args)
         {
-            PalindromeService p = new PalindromeService();
-            bool f = p.Check(Console.ReadLine());
-            Console.WriteLine(f);
+            IPalindromeService p = new PalindromeService();
+            string r = null;
+            do
+            {
+                try
+                {
+                    r = Console.ReadLine();
+                    bool f = p.Check(r);
+                    Console.WriteLine(f);
+                }
+
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine("перехват");
+                    Console.WriteLine(ex.ToString());
+                }
+            }
+            while (r != "exit");
         }
-        
     }
 }

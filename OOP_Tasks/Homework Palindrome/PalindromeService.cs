@@ -5,27 +5,27 @@ using System.Text;
 
 namespace Homework_Palindrome
 {
-   public class PalindromeService: IPalindromeService
+    public class PalindromeService : IPalindromeService
     {
-
-        public  bool  Check (string inputString)
+        public bool Check(string inputString)
         {
-            bool d = inputString.Contains(' ');
-            if (d)
+           string s = inputString.ToLower();
+           string newInputString = s.Replace(" ", "");
+            if (inputString.Length < 2)
             {
-                throw new ArgumentException("Enter a word without spaces");
+                throw new ArgumentException("The word must contain at least 2 letters");
             }
-            char[] pol = new char[inputString.Length];
-            pol = inputString.ToCharArray();
+            char[] pol = new char[newInputString.Length];
+            pol = newInputString.ToCharArray();
             char[] polrev = new char[pol.Length];
-            polrev = inputString.ToCharArray();
+            polrev = newInputString.ToCharArray();
             Array.Reverse(polrev);
-
-                for (int i = 0; i < pol.Length; i++)
-                {
-                    if (pol[i] != polrev[i])
-                        return false;
-                }
+          
+            for (int i = 0; i < pol.Length; i++)
+            {
+                if (pol[i] != polrev[i])
+                    return false;
+            }
 
             return true;
         }
