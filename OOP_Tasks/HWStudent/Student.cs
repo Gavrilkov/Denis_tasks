@@ -33,13 +33,12 @@ namespace HWStudent
             if (AverageMark == 5)
             {
                 this.Sum = 100;
-                return Sum;
             }
             else
             {
                 this.Sum = 80;
-                return Sum;
             }
+            return Sum;
         }
     }
 }

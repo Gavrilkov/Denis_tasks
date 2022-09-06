@@ -12,14 +12,13 @@ namespace HWStudent
         {
             if (AverageMark == 5)
             {
-                int Sum = 200;
-                return Sum;
+                 base.Sum = 200;
             }
             else
             {
-                int Sum = 180;
-                return Sum;
+                base.Sum = 180;
             }
+            return base.Sum;
         }
     }
 }
