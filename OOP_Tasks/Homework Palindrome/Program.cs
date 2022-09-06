@@ -19,8 +19,7 @@ namespace Homework_Palindrome
 
                 catch (ArgumentException ex)
                 {
-                    Console.WriteLine("перехват");
-                    Console.WriteLine(ex.ToString());
+                    Console.WriteLine(ex.Message);
                 }
             }
             while (r != "exit");
