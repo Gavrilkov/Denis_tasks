@@ -1,4 +1,6 @@
 ﻿using System;
+using StudentLib;
+
 
 namespace HWStudent
 {

@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Compare", "Compare\Compare.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "adding structure objects", "adding structure objects\adding structure objects.csproj", "{3CD55FFB-0B6B-4B61-9145-2C09603344F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWStudent", "HWStudent\HWStudent.csproj", "{5FD4BCCC-772F-4F56-A191-0F35D7B6AD2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWStudent", "HWStudent\HWStudent.csproj", "{5FD4BCCC-772F-4F56-A191-0F35D7B6AD2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentLib", "StudentLib\StudentLib.csproj", "{D1D92974-5CF7-412C-90FA-C10C8886FD1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5FD4BCCC-772F-4F56-A191-0F35D7B6AD2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FD4BCCC-772F-4F56-A191-0F35D7B6AD2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FD4BCCC-772F-4F56-A191-0F35D7B6AD2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1D92974-5CF7-412C-90FA-C10C8886FD1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1D92974-5CF7-412C-90FA-C10C8886FD1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1D92974-5CF7-412C-90FA-C10C8886FD1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1D92974-5CF7-412C-90FA-C10C8886FD1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

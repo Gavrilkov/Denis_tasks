@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HWStudent
+namespace StudentLib
 {
     //    Создайте пример наследования, реализуйте класс Student и класс Aspirant, аспирант отличается от студента наличием некой научной работы.
     //Класс Student содержит переменные: String FirstName, LastName, Group. 
@@ -13,13 +13,13 @@ namespace HWStudent
     //            Если средняя оценка аспиранта равна 5, то сумма 200 р, иначе 180.
     //Создать массив типа Student, содержащий объекты класса Student и Aspirant. 
     //            Вызвать метод GetScholarship() для каждого элемента массива.
-    class Student
+   public class Student
     {
-        public string FirstName;
-        public string LastName;
-        public string Group;
-        public double AverageMark;
-        public int Sum;
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Group { get; set; }
+        public double AverageMark { get; set; }
+        public int Sum { get; set; }
         public Student(string _firstName, string _lastName, string _group, double _averageMark)
         {
             FirstName = _firstName;
