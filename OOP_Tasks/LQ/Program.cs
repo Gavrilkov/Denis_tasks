@@ -19,20 +19,20 @@ namespace LQ
     new Person ("Alice", 24, new List<string> {"spanish", "german" })
 };
 
-            var selectedPeople = people.Where(p => p.Age > 25).OrderBy(p => p.Age);
-            foreach (var pers in selectedPeople)
+            var selectedpeople = people.Where(p => p.Age > 25).OrderBy(p => p.Age);
+            foreach (var pers in selectedpeople)
             {
                 Console.WriteLine($" {pers.Name}");
             }
 
-            people.Where(p => Filterby(p)).OrderByDescending(p => p.Age).ToList().ForEach(p => Print(p));
+            people.Where(p => filterby(p)).OrderByDescending(p => p.Age).ToList().ForEach(p => print(p));
 
-            void Print(Person pers)
+            void print(Person pers)
             {
                 Console.WriteLine(pers.Name);
             }
 
-            bool Filterby(Person pers)
+            bool filterby(Person pers)
             {
                 if (pers.Age > 25 && pers.Language.Contains("english") && pers.Language.Count < 2)
                     return true;
@@ -41,9 +41,9 @@ namespace LQ
             }
 
             List<string> s = new List<string> { "" };
-            people.ToList().ForEach(p => PrintLanguage(p));
+            people.ToList().ForEach(p => printlanguage(p));
 
-            void PrintLanguage(Person pers)
+            void printlanguage(Person pers)
             {
                 for (int i = 0; i < pers.Language.Count; i++)
                 {
@@ -56,6 +56,32 @@ namespace LQ
                     }
                 }
             }
+            var selectedPeople2 = people.SelectMany(u => u.Language).Distinct();
+
+            foreach (var pers in selectedPeople2)
+            {
+                Console.WriteLine(pers);
+            }
+
+            var selectedpeople1 = people.SelectMany(p => p.Language,
+                                    (person, lang) => new { lang = lang, person1 = person.Name });
+
+            foreach (var pers1 in selectedpeople1)
+            {
+                Console.WriteLine(pers1);
+            }
+
+
+            Lookup<string, string> selectedpeople3 = (Lookup<string, string>)selectedpeople1.ToLookup(p => p.lang,
+                p => p.person1);
+            foreach (IGrouping<string, string> pers1 in selectedpeople3)
+            {
+                Console.WriteLine(pers1.Key);
+
+                foreach (string str in pers1)
+                    Console.WriteLine("    {0}", str);
+            }
         }
     }
 }
+
