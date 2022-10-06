@@ -81,6 +81,17 @@ namespace LQ
                 foreach (string str in pers1)
                     Console.WriteLine("    {0}", str);
             }
+
+            Lookup<string, int> selectedpeople5 = (Lookup<string, int>)people.ToLookup(p => p.Name,
+    p => p.Language.Count);
+            foreach (IGrouping<string, int> pers5 in selectedpeople5)
+            {
+                Console.Write($"{pers5.Key}: ");
+
+                foreach (var str1 in pers5)
+                    Console.WriteLine("{0}", str1);
+            }
+
         }
     }
 }
