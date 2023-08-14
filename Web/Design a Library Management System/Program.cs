@@ -1,9 +1,14 @@
+using DesignLibraryManagementSystem.Models;
+using Library;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+builder.Configuration.AddJsonFile("appsettings.json");
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+ builder.Services.AddSingleton(new LibraryContext(connectionString));
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
