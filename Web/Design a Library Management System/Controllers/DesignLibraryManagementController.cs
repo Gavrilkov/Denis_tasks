@@ -20,16 +20,25 @@ namespace DesignLibraryManagementSystem.Controllers
             _context = context;
         }
 
-        [HttpGet("books")]
+        [HttpGet("api/books")]
 
-        public async Task<ActionResult<IEnumerable<BookEntity>>> GetBooks()
+        public async Task<ActionResult<IEnumerable<BookDTO>>> GetBooks()
         {
-            return await _context.Book.ToListAsync();
+
+            var Books = await _context.Book.ToListAsync();
+            var BookDTOList = Books.Select(x => new BookDTO 
+            { 
+            Id = x.Id,
+            Title = x.Title,
+            Author = x.Author,
+            ISBN = x.ISBN
+            }).ToList();
+            return Ok(BookDTOList);
         }
 
         [HttpGet("books/{id}")]
 
-        public async Task<ActionResult<BookEntity>> GetBook(int id)
+        public async Task<ActionResult<BookDTO>> GetBook(int id)
         {
             var Books = await _context.Book.FindAsync(id);
 
@@ -37,11 +46,17 @@ namespace DesignLibraryManagementSystem.Controllers
             {
                 return NotFound();
             }
-
-            return Books;
+            var bookDTO = new BookDTO()
+            {
+                Id = Books.Id,
+                Title = Books.Title,
+                Author = Books.Author,
+                ISBN = Books.ISBN
+            };
+            return bookDTO;
         }
 
-        [HttpPost("books")]
+        [HttpPost("api/books")]
         public async Task<ActionResult<BookEntity>> PostBooks(BookDTO Books)
         {
             var bookEntity = new BookEntity();
@@ -55,27 +70,37 @@ namespace DesignLibraryManagementSystem.Controllers
             return CreatedAtAction("GetBook", new { id = bookEntity.Id }, bookEntity);
         }
 
-        [HttpGet("members")]
-        public async Task<ActionResult<IEnumerable<LibraryMemberEntity>>> GetLibraryMembers()
+        [HttpGet("api/members")]
+        public async Task<ActionResult<IEnumerable<LibraryMemberDTO>>> GetLibraryMembers()
         {
-            return await _context.LibraryMember.ToListAsync();
+            var libraryMembers = await _context.LibraryMember.ToListAsync();
+            var libraryMembersDTOList = libraryMembers.Select(x => new LibraryMemberDTO()
+            {
+                MemberID = x.MemberID,
+                Name = x.Name
+            }).ToList();
+            return libraryMembersDTOList;
         }
 
-        [HttpGet("members/{id}")]
+        [HttpGet("api/members/{id}")]
 
-        public async Task<ActionResult<LibraryMemberEntity>> GetLibraryMember(int id)
+        public async Task<ActionResult<LibraryMemberDTO>> GetLibraryMember(int id)
         {
-            var LibraryMembers = await _context.LibraryMember.FindAsync(id);
+            var libraryMember = await _context.LibraryMember.FindAsync(id);
 
-            if (LibraryMembers == null)
+            if (libraryMember == null)
             {
                 return NotFound();
             }
-
-            return LibraryMembers;
+            var libraryMemberDTO = new LibraryMemberDTO()
+            {
+                MemberID = libraryMember.MemberID, 
+                Name = libraryMember.Name
+            };
+            return libraryMemberDTO;
         }
 
-        [HttpPost("members")]
+        [HttpPost("api/members")]
 
         public async Task<ActionResult<LibraryMemberEntity>> PostMembers(LibraryMemberDTO libraryMembers)
         {
@@ -88,31 +113,53 @@ namespace DesignLibraryManagementSystem.Controllers
             return CreatedAtAction("GetLibraryMember", new { id = libraryMemberEntity.MemberID }, libraryMemberEntity);
         }
 
-        [HttpGet("bookings")]
-        public async Task<ActionResult<IEnumerable<TransactionEntity>>> GetBookings()
+        [HttpGet("api/bookings")]
+        public async Task<ActionResult<IEnumerable<TransactionDTO>>> GetBookings()
         {
-            return await _context.LibraryTransaction.ToListAsync();
-        }
+            var transactionDTO = new TransactionDTO();
 
-        [HttpGet("bookings/{id}")]
-        public async Task<ActionResult<TransactionEntity>> GetBooking(int id)
-        {
-            var booking = await _context.LibraryTransaction.FindAsync(id);
+            var booking = await _context.LibraryTransaction.Include(t => t.MemberID).Include(t => t.BookID).ToListAsync();
+
             if (booking == null)
             {
                 return NotFound();
             }
-            return booking;
+            var transactionDTOList = booking.Select(booking => new TransactionDTO
+            {
+                TransactionID = booking.TransactionID,
+                DueDate = booking.DueDate,
+                MemberIDDTO = booking.MemberID.MemberID,
+                BookIDDTO = booking.BookID.Id
+            }).ToList();
+            return transactionDTOList;
         }
 
-        [HttpPost("bookings")]
-        public async Task<ActionResult<TransactionEntity>> PostBookings(TransactionDTO bookings)
+        [HttpGet("bookings/{id}")]
+        public async Task<ActionResult<TransactionDTO>> GetBooking(int id)
+        {
+            var transactionDTO = new TransactionDTO();
+            var booking = await _context.LibraryTransaction.Include(t => t.MemberID).Include(t => t.BookID).FirstOrDefaultAsync(t => t.TransactionID == id);
+
+            if (booking == null)
+            {
+                return NotFound();
+            }
+            transactionDTO.DueDate = booking.DueDate;
+            transactionDTO.TransactionID = booking.TransactionID;
+            transactionDTO.MemberIDDTO = booking.MemberID.MemberID;
+            transactionDTO.BookIDDTO = booking.BookID.Id;
+
+            return transactionDTO;
+        }
+
+        [HttpPost("api/bookings")]
+        public async Task<ActionResult<TransactionDTO>> PostBookings(TransactionDTO bookings)
         {
             var transactionEntity = new TransactionEntity();
         //    transactionEntity.TransactionID = bookings.TransactionID;
             transactionEntity.DueDate = bookings.DueDate;
 
-            var libraryMember = await _context.LibraryMember.FirstOrDefaultAsync(member => member.MemberID == bookings.MemberID);
+            var libraryMember = await _context.LibraryMember.FirstOrDefaultAsync(member => member.MemberID == bookings.BookIDDTO);
 
             if (libraryMember == null)
             {
@@ -120,7 +167,7 @@ namespace DesignLibraryManagementSystem.Controllers
             }
             transactionEntity.MemberID = libraryMember;
 
-            var book = await _context.Book.FirstOrDefaultAsync(b => b.Id == bookings.BookID);
+            var book = await _context.Book.FirstOrDefaultAsync(b => b.Id == bookings.BookIDDTO);
             if (book == null)
             {
                 return NotFound();
@@ -129,7 +176,7 @@ namespace DesignLibraryManagementSystem.Controllers
 
             _context.LibraryTransaction.Add(transactionEntity);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("GetBooking", new { id = transactionEntity.TransactionID }, transactionEntity);
+            return CreatedAtAction("GetBooking", new { id = transactionEntity.TransactionID }, bookings);
         }
     }
 }
