@@ -18,9 +18,9 @@ namespace Library
 
         }
 
-        public LibraryContext(DbContextOptions<LibraryContext> options) : base(options) {  }
+        public LibraryContext(DbContextOptions<LibraryContext> options) : base(options) { }
 
-        
+
         public virtual DbSet<TransactionEntity> LibraryTransaction { get; set; }
 
         public virtual DbSet<LibraryMemberEntity> LibraryMember { get; set; }
@@ -59,6 +59,17 @@ namespace Library
                 //.HasForeignKey(e => e.BookID)
                 //.OnDelete(DeleteBehavior.Cascade);
             });
+        }
+        public async Task<List<BookEntity>> SearchBooks(string query)
+        {
+            var result = await Book.Where(f => f.Title.Contains(query) || f.Author.Contains(query)).Select(d => new BookEntity
+            {
+                Id = d.Id,
+                Title = d.Title,
+                Author = d.Author,
+                ISBN = d.ISBN
+            }).ToListAsync();
+            return result;
         }
     }
 }
