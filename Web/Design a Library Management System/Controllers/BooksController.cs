@@ -41,7 +41,7 @@ namespace Design_a_Library_Management_System.Controllers
 
             if (books == null)
             {
-                return NotFound();
+                return NotFound("book not found");
             }
             var bookDTO = new BookDTO()
             {

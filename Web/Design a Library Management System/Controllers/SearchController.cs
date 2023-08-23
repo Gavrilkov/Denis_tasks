@@ -9,20 +9,14 @@ namespace Design_a_Library_Management_System.Controllers
     [Route("api/search")]
     public class SearchController : ControllerBase
     {
-        private readonly LibraryContext _context;
+        private readonly SearchService _searchService;
+         public SearchController(SearchService searchService) { _searchService = searchService; }
 
-        public SearchController(LibraryContext context)
-        {
-            _context = context;
-        }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BookDTO>>> GetBooks([FromQuery] string q)
         {
-            if (string.IsNullOrWhiteSpace(q))
-            {
-                return BadRequest("Search query cannot be empty.");
-            }
-            var books = await _context.SearchBooks(q);
+            
+            var books = await _searchService.SearchBooks(q);
             var booksDTO = books.Select(k => new BookDTO()
             {
                 Id = k.Id,
@@ -33,9 +27,8 @@ namespace Design_a_Library_Management_System.Controllers
 
             if (books.Count == 0)
             {
-                return NotFound();
+                return NotFound("No such books have been found");
             }
-
             return Ok(booksDTO);
         }
     }

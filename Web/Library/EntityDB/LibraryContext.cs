@@ -46,7 +46,7 @@ namespace Library
                 entity.HasKey(e => e.MemberID);
                 entity.Property(e => e.MemberID).HasColumnType("int");
                 entity.Property(e => e.Name).HasColumnType("nvarchar(50)");
-
+                entity.Ignore(e => e.BooksBorrowed);
             });
 
             modelBuilder.Entity<TransactionEntity>(entity =>
@@ -60,16 +60,6 @@ namespace Library
                 //.OnDelete(DeleteBehavior.Cascade);
             });
         }
-        public async Task<List<BookEntity>> SearchBooks(string query)
-        {
-            var result = await Book.Where(f => f.Title.Contains(query) || f.Author.Contains(query)).Select(d => new BookEntity
-            {
-                Id = d.Id,
-                Title = d.Title,
-                Author = d.Author,
-                ISBN = d.ISBN
-            }).ToListAsync();
-            return result;
-        }
+
     }
 }

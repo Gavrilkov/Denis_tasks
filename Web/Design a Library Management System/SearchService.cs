@@ -1,0 +1,27 @@
+﻿using DesignLibraryManagementSystem.Models;
+using Library;
+using Microsoft.EntityFrameworkCore;
+
+namespace Design_a_Library_Management_System
+{
+    public class SearchService
+    {
+        private readonly LibraryContext _context;
+
+        public SearchService(LibraryContext context)
+        {
+            _context = context;
+        }
+        public async Task<List<BookEntity>> SearchBooks(string query)
+        {
+            var result = await _context.Book.Where(f => f.Title.Contains(query) || f.Author.Contains(query)).Select(d => new BookEntity
+            {
+                Id = d.Id,
+                Title = d.Title,
+                Author = d.Author,
+                ISBN = d.ISBN
+            }).ToListAsync();
+            return result;
+        }
+    }
+}

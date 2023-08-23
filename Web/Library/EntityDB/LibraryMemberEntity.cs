@@ -9,7 +9,7 @@ namespace DesignLibraryManagementSystem.Models
     {
         public int MemberID { get; set; }
         public string Name { get; set; }
-        [NotMapped]
+      
         public List<BookEntity> BooksBorrowed { get; set; } = new List<BookEntity>();
 
     }

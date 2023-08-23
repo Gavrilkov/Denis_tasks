@@ -29,7 +29,7 @@ namespace DesignLibraryManagementSystem.Controllers
 
             if (booking == null)
             {
-                return NotFound();
+                return NotFound("booking not found");
             }
             var transactionDTOList = booking.Select(booking => new TransactionDTO
             {
@@ -66,18 +66,18 @@ namespace DesignLibraryManagementSystem.Controllers
         //    transactionEntity.TransactionID = bookings.TransactionID;
             transactionEntity.DueDate = bookings.DueDate;
 
-            var libraryMember = await _context.LibraryMember.FirstOrDefaultAsync(member => member.MemberID == bookings.BookIDDTO);
+            var libraryMember = await _context.LibraryMember.FirstOrDefaultAsync(member => member.MemberID == bookings.MemberIDDTO);
 
             if (libraryMember == null)
             {
-                return NotFound();
+                return NotFound("There is no member with this id");
             }
             transactionEntity.MemberID = libraryMember;
 
             var book = await _context.Book.FirstOrDefaultAsync(b => b.Id == bookings.BookIDDTO);
             if (book == null)
             {
-                return NotFound();
+                return NotFound("There is no book with this id");
             }
             transactionEntity.BookID = book;
 

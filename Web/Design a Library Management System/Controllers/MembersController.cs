@@ -37,7 +37,7 @@ namespace Design_a_Library_Management_System.Controllers
 
             if (libraryMember == null)
             {
-                return NotFound();
+                return NotFound("libraryMember not found");
             }
             var libraryMemberDTO = new LibraryMemberDTO()
             {
