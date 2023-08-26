@@ -18,35 +18,27 @@ namespace Design_a_Library_Management_System.Controllers
         }
 
         [HttpGet]
-
-        public async void Get()
+        
+        public async Task<ActionResult<IEnumerable<LibraryMemberDTO>>> GetMembers()
         {
-            await _memberService.GetLibraryMembers();
-
+            var result = await _memberService.GetLibraryMembers();
+            return result;
         }
 
-        //public async Task<ActionResult<IEnumerable<LibraryMemberDTO>>> GetMembers()
-        //{
-        //  var result = await _memberService.GetLibraryMembers();
-        //  return result;
-        //}
+        [HttpGet("{id}")]
 
+        public async Task<ActionResult<LibraryMemberDTO>> GetMember(int id)
+        {
+            var result = await _memberService.GetLibraryMember(id);
+            return result;
+        }
 
-        //[HttpGet("{id}")]
+        [HttpPost]
 
-        //public async Task<ActionResult<LibraryMemberDTO>> GetMember(int id)
-        //{
-        //    var result = await _memberService.GetLibraryMember(id);
-        //    return result;
-        //}
-
-        //[HttpPost]
-
-        //public async Task<ActionResult<LibraryMemberEntity>> PostMembers(LibraryMemberDTO libraryMembers)
-        //{
-        //    var result = await _memberService.PostMembers(libraryMembers);
-        //    return result;
-        //}
-
+        public async Task<ActionResult<LibraryMemberEntity>> PostMembers(LibraryMemberDTO libraryMembers)
+        {
+            var result = await _memberService.PostMembers(libraryMembers);
+            return result;
+        }
     }
 }
