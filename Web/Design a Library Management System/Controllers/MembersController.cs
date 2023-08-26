@@ -8,57 +8,45 @@ namespace Design_a_Library_Management_System.Controllers
 {
     [ApiController]
     [Route("api/members")]
-    public class MembersController : ControllerBase
+    public class MembersController : Controller
     {
-        private readonly LibraryContext _context;
+        private readonly IMemberService _memberService;
 
-        public MembersController(LibraryContext context)
+        public MembersController(IMemberService memberService)
         {
-            _context = context;
+            _memberService = memberService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LibraryMemberDTO>>> GetLibraryMembers()
+
+        public async void Get()
         {
-            var libraryMembers = await _context.LibraryMember.ToListAsync();
-            var libraryMembersDTOList = libraryMembers.Select(x => new LibraryMemberDTO()
-            {
-                MemberID = x.MemberID,
-                Name = x.Name
-            }).ToList();
-            return libraryMembersDTOList;
+            await _memberService.GetLibraryMembers();
+
         }
 
-        [HttpGet("{id}")]
+        //public async Task<ActionResult<IEnumerable<LibraryMemberDTO>>> GetMembers()
+        //{
+        //  var result = await _memberService.GetLibraryMembers();
+        //  return result;
+        //}
 
-        public async Task<ActionResult<LibraryMemberDTO>> GetLibraryMember(int id)
-        {
-            var libraryMember = await _context.LibraryMember.FindAsync(id);
 
-            if (libraryMember == null)
-            {
-                return NotFound("libraryMember not found");
-            }
-            var libraryMemberDTO = new LibraryMemberDTO()
-            {
-                MemberID = libraryMember.MemberID,
-                Name = libraryMember.Name
-            };
-            return libraryMemberDTO;
-        }
+        //[HttpGet("{id}")]
 
-        [HttpPost]
+        //public async Task<ActionResult<LibraryMemberDTO>> GetMember(int id)
+        //{
+        //    var result = await _memberService.GetLibraryMember(id);
+        //    return result;
+        //}
 
-        public async Task<ActionResult<LibraryMemberEntity>> PostMembers(LibraryMemberDTO libraryMembers)
-        {
-            var libraryMemberEntity = new LibraryMemberEntity();
-            libraryMemberEntity.Name = libraryMembers.Name;
+        //[HttpPost]
 
-            _context.LibraryMember.Add(libraryMemberEntity);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetLibraryMember", new { id = libraryMemberEntity.MemberID }, libraryMemberEntity);
-        }
+        //public async Task<ActionResult<LibraryMemberEntity>> PostMembers(LibraryMemberDTO libraryMembers)
+        //{
+        //    var result = await _memberService.PostMembers(libraryMembers);
+        //    return result;
+        //}
 
     }
 }

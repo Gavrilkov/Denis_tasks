@@ -10,12 +10,12 @@ namespace Design_a_Library_Management_System.Controllers
     public class SearchController : ControllerBase
     {
         private readonly SearchService _searchService;
-         public SearchController(SearchService searchService) { _searchService = searchService; }
+        public SearchController(SearchService searchService) { _searchService = searchService; }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BookDTO>>> GetBooks([FromQuery] string q)
         {
-            
+
             var books = await _searchService.SearchBooks(q);
             var booksDTO = books.Select(k => new BookDTO()
             {
