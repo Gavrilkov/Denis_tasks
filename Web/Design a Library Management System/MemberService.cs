@@ -37,7 +37,7 @@ namespace Design_a_Library_Management_System
             return libraryMemberDTO;
         }
 
-        public async Task<LibraryMemberEntity> PostMembers(LibraryMemberDTO libraryMembers)
+        public async Task<LibraryMemberDTO> PostMembers(LibraryMemberDTO libraryMembers)
         {
             var libraryMemberEntity = new LibraryMemberEntity();
             libraryMemberEntity.Name = libraryMembers.Name;
@@ -45,7 +45,7 @@ namespace Design_a_Library_Management_System
             _context.LibraryMember.Add(libraryMemberEntity);
             await _context.SaveChangesAsync();
 
-            return libraryMemberEntity;
+            return libraryMembers;
         }
     }
 }

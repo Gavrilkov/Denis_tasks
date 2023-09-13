@@ -39,7 +39,7 @@ namespace Design_a_Library_Management_System.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult<LibraryMemberEntity>> PostMembers(LibraryMemberDTO libraryMembers)
+        public async Task<ActionResult<LibraryMemberDTO>> PostMembers(LibraryMemberDTO libraryMembers)
         {
             var createdMember = await _memberService.PostMembers(libraryMembers);
             return CreatedAtAction("GetMember", new { id = createdMember.MemberID }, createdMember);

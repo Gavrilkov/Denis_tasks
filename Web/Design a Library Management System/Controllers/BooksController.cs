@@ -54,7 +54,7 @@ namespace Design_a_Library_Management_System.Controllers
         }
 
         [HttpPost("api/books")]
-        public async Task<ActionResult<BookEntity>> PostBooks(BookDTO Books)
+        public async Task<ActionResult<BookDTO>> PostBooks(BookDTO Books)
         {
             var bookEntity = new BookEntity();
             bookEntity.Title = Books.Title;

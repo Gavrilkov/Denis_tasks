@@ -11,6 +11,6 @@ namespace Design_a_Library_Management_System
 
         public  Task<LibraryMemberDTO> GetLibraryMember(int id);
 
-        public  Task<LibraryMemberEntity> PostMembers(LibraryMemberDTO libraryMembers);
+        public  Task<LibraryMemberDTO> PostMembers(LibraryMemberDTO libraryMembers);
     }
 }
