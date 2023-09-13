@@ -22,7 +22,7 @@ namespace Design_a_Library_Management_System.Controllers
         public async Task<ActionResult<IEnumerable<LibraryMemberDTO>>> GetMembers()
         {
             var result = await _memberService.GetLibraryMembers();
-            return result;
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
@@ -30,15 +30,19 @@ namespace Design_a_Library_Management_System.Controllers
         public async Task<ActionResult<LibraryMemberDTO>> GetMember(int id)
         {
             var result = await _memberService.GetLibraryMember(id);
-            return result;
+            if (result == null) 
+            { 
+            return NotFound();
+            }
+            return Ok(result);
         }
 
         [HttpPost]
 
         public async Task<ActionResult<LibraryMemberEntity>> PostMembers(LibraryMemberDTO libraryMembers)
         {
-            var result = await _memberService.PostMembers(libraryMembers);
-            return result;
+            var createdMember = await _memberService.PostMembers(libraryMembers);
+            return CreatedAtAction("GetMember", new { id = createdMember.MemberID }, createdMember);
         }
     }
 }

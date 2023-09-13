@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Design_a_Library_Management_System
 {
-    public class MemberService : ControllerBase, IMemberService
+    public class MemberService : IMemberService
     {
         private readonly LibraryContext _context;
 
@@ -15,7 +15,7 @@ namespace Design_a_Library_Management_System
             _context = context;
         }
 
-        public async Task<ActionResult<IEnumerable<LibraryMemberDTO>>> GetLibraryMembers()
+        public async Task<IEnumerable<LibraryMemberDTO>> GetLibraryMembers()
         {
             var libraryMembers = await _context.LibraryMember.ToListAsync();
             var libraryMembersDTOList = libraryMembers.Select(x => new LibraryMemberDTO()
@@ -26,14 +26,9 @@ namespace Design_a_Library_Management_System
             return libraryMembersDTOList;
         }
 
-        public async Task<ActionResult<LibraryMemberDTO>> GetLibraryMember(int id)
+        public async Task<LibraryMemberDTO> GetLibraryMember(int id)
         {
             var libraryMember = await _context.LibraryMember.FindAsync(id);
-
-            if (libraryMember == null)
-            {
-                return NotFound("libraryMember not found");
-            }
             var libraryMemberDTO = new LibraryMemberDTO()
             {
                 MemberID = libraryMember.MemberID,
@@ -42,7 +37,7 @@ namespace Design_a_Library_Management_System
             return libraryMemberDTO;
         }
 
-        public async Task<ActionResult<LibraryMemberEntity>> PostMembers(LibraryMemberDTO libraryMembers)
+        public async Task<LibraryMemberEntity> PostMembers(LibraryMemberDTO libraryMembers)
         {
             var libraryMemberEntity = new LibraryMemberEntity();
             libraryMemberEntity.Name = libraryMembers.Name;
@@ -50,7 +45,7 @@ namespace Design_a_Library_Management_System
             _context.LibraryMember.Add(libraryMemberEntity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetLibraryMember", new { id = libraryMemberEntity.MemberID }, libraryMemberEntity);
+            return libraryMemberEntity;
         }
     }
 }

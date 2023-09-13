@@ -7,10 +7,10 @@ namespace Design_a_Library_Management_System
 {
     public interface IMemberService
     {
-        public  Task<ActionResult<IEnumerable<LibraryMemberDTO>>> GetLibraryMembers();
+        public  Task<IEnumerable<LibraryMemberDTO>> GetLibraryMembers();
 
-        public  Task<ActionResult<LibraryMemberDTO>> GetLibraryMember(int id);
+        public  Task<LibraryMemberDTO> GetLibraryMember(int id);
 
-        public  Task<ActionResult<LibraryMemberEntity>> PostMembers(LibraryMemberDTO libraryMembers);
+        public  Task<LibraryMemberEntity> PostMembers(LibraryMemberDTO libraryMembers);
     }
 }

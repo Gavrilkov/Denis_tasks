@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Design_a_Library_Management_System
 {
-    public class SearchService
+    public class SearchService : ISearchService
     {
         private readonly LibraryContext _context;
 

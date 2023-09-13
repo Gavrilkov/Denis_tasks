@@ -9,7 +9,7 @@ builder.Configuration.AddJsonFile("appsettings.json");
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddSingleton(new LibraryContext(connectionString));
 builder.Services.AddControllers();
-builder.Services.AddScoped<SearchService>();
+builder.Services.AddScoped<ISearchService, SearchService>();
 builder.Services.AddScoped<IMemberService,MemberService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
