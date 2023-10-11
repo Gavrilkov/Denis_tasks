@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddSingleton(new LibraryContext(connectionString));
+
 builder.Services.AddControllers();
 builder.Services.AddScoped<ISearchService, SearchService>();
 builder.Services.AddScoped<IMemberService,MemberService>();
